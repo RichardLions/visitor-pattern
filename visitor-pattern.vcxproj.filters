@@ -1,19 +1,54 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <None Include=".gitattributes" />
-    <None Include=".gitignore" />
-    <None Include="README.md" />
-    <None Include="vcpkg.json" />
-    <None Include="vcpkg-configuration.json" />
-    <None Include=".editorconfig" />
-    <None Include=".runsettings" />
+    <None Include=".editorconfig">
+      <Filter>Misc</Filter>
+    </None>
+    <None Include=".gitattributes">
+      <Filter>Misc</Filter>
+    </None>
+    <None Include=".gitignore">
+      <Filter>Misc</Filter>
+    </None>
+    <None Include=".runsettings">
+      <Filter>Misc</Filter>
+    </None>
+    <None Include="README.md">
+      <Filter>Misc</Filter>
+    </None>
+    <None Include="vcpkg.json">
+      <Filter>Misc</Filter>
+    </None>
+    <None Include="vcpkg-configuration.json">
+      <Filter>Misc</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="visitorpattern_referencesemantics.cpp">
+      <Filter>ReferenceSemantics</Filter>
+    </ClCompile>
+    <ClCompile Include="visitorpatterntypes_referencesemantics.cpp">
+      <Filter>ReferenceSemantics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="logger.h" />
-    <ClInclude Include="random.h" />
+    <ClInclude Include="visitorpattern_referencesemantics.h">
+      <Filter>ReferenceSemantics</Filter>
+    </ClInclude>
+    <ClInclude Include="visitorpatternexamples_referencesemantics.h">
+      <Filter>ReferenceSemantics</Filter>
+    </ClInclude>
+    <ClInclude Include="visitorpatterntypes_referencesemantics.h">
+      <Filter>ReferenceSemantics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ReferenceSemantics">
+      <UniqueIdentifier>{39753f4d-e27a-4194-91a6-b0166a5d55a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Misc">
+      <UniqueIdentifier>{f3166971-5f4f-4b95-ab7b-2d5be37a9979}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

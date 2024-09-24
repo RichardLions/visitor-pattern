@@ -2,6 +2,23 @@
 
 This pattern was inspired by [Visitor Design Pattern](https://www.youtube.com/watch?v=PEcy1vYHb8A&ab_channel=CppCon).
 
+## When To Use
+
+* This pattern is best for adding operations over adding types.
+* Restricts the operations to the public interface of the types.
+
+Reference Semantics:
+* Virtual function calls.
+* Fragmented memory on the heap.
+* Can use forward declarations of types.
+
+Value Semantics:
+* No Virtual function calls.
+* Continuous memory.
+* More natural to use semantic types.
+* Waste memory if items vary in size.
+* Needs full definition of types, increasing includes.
+
 ## Features
 
 ...
@@ -9,6 +26,7 @@ This pattern was inspired by [Visitor Design Pattern](https://www.youtube.com/wa
 ## Setup
 
 This repository uses the .sln/.proj files created by Visual Studio 2022 Community Edition.
+Using MSVC compiler, Preview version(C++23 Preview). 
 
 ### Catch2
 The examples for how to use the pattern are written as Unit Tests.
@@ -40,5 +58,8 @@ vcpkg new --application
 ```
 
 TODO:
-- [ ] Pattern Implementation
-- [ ] Unit Tests
+- [x] Reference Semantics Implementation
+- [x] Reference Semantics Unit Tests
+- [ ] Value Semantics Implementation
+- [ ] Value Semantics Unit Tests
+- [ ] Benchmarks

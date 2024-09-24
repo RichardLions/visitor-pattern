@@ -1,6 +1,7 @@
-#include <iostream>
+#include <catch2/catch_session.hpp>
+#include "visitorpatternexamples_referencesemantics.h"
 
-int main()
+int main(const int argc, const char* const argv[])
 {
-    std::cout << "Hello World!\n";
+    return Catch::Session().run(argc, argv);
 }
