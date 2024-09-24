@@ -1,9 +1,12 @@
-# Command Pattern
+# Visitor Pattern
 
 This pattern was inspired by [Visitor Design Pattern](https://www.youtube.com/watch?v=PEcy1vYHb8A&ab_channel=CppCon).
 
 ## When To Use
 
+This pattern decouples operations from types. Allowing for easy addition of new operations.
+
+General:
 * This pattern is best for adding operations over adding types.
 * Restricts the operations to the public interface of the types.
 
@@ -16,12 +19,87 @@ Value Semantics:
 * No Virtual function calls.
 * Continuous memory.
 * More natural to use semantic types.
-* Waste memory if items vary in size.
-* Needs full definition of types, increasing includes.
+* Wastes memory if types vary in size.
+* Needs full definition of types, may increase include dependencies.
 
 ## Features
 
-...
+### Reference Semantics
+
+Create a Type:
+```cpp
+class Type
+{
+public:
+    virtual ~Type() = default;
+    virtual void Accept(const TypeVisitor& visitor) = 0;
+};
+
+class TypeA final : public Type
+{
+public:
+    void Accept(const TypeVisitor& visitor) override { visitor.Visit(*this); } 
+};
+```
+
+Create an Operation:
+```cpp
+class TypeVisitor
+{
+public:
+    virtual ~TypeVisitor() = default;
+    virtual void Visit(TypeA& type) const = 0;
+};
+
+class TypeOperationA final : public TypeVisitor
+{
+public:
+    void Visit(TypeA& type) const override {}
+};
+```
+
+Call an Operation:
+```cpp
+Types types{};
+types.push_back(std::make_unique<TypeA>());
+for(const std::unique_ptr<Type>& type : types)
+{
+    type->Accept(TypeOperationA{});
+}
+```
+
+### Value Semantics
+
+Create a Type:
+```cpp
+class TypeA
+{
+public:
+};
+
+using Type = std::variant<TypeA>;
+using Types = std::vector<Type>;
+```
+
+Create an Operation:
+```cpp
+class TypeOperationA final
+{
+public:
+    static void Visit(Type& type) { std::visit(TypeOperationA{}, type); }
+    void operator()(TypeA& type) const {}
+};
+```
+
+Call an Operation:
+```cpp
+Types types{};
+types.emplace_back(TypeA{});
+for(Type& type : types)
+{
+    TypeOperationA::Visit(type);
+}
+```
 
 ## Setup
 
@@ -60,6 +138,6 @@ vcpkg new --application
 TODO:
 - [x] Reference Semantics Implementation
 - [x] Reference Semantics Unit Tests
-- [ ] Value Semantics Implementation
-- [ ] Value Semantics Unit Tests
-- [ ] Benchmarks
+- [x] Value Semantics Implementation
+- [x] Value Semantics Unit Tests
+- [x] Benchmarks

@@ -1,5 +1,5 @@
-#include "visitorpatterntypes_referencesemantics.h"
-#include "visitorpattern_referencesemantics.h"
+#include "referencesemantics/visitorpatterntypes_referencesemantics.h"
+#include "referencesemantics/visitorpattern_referencesemantics.h"
 
 namespace ReferenceSemantics
 {

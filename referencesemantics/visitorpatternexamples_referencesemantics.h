@@ -1,8 +1,8 @@
 #include <catch2/benchmark/catch_benchmark.hpp>
 #include <catch2/catch_test_macros.hpp>
 
-#include "visitorpattern_referencesemantics.h"
-#include "visitorpatterntypes_referencesemantics.h"
+#include "referencesemantics/visitorpattern_referencesemantics.h"
+#include "referencesemantics/visitorpatterntypes_referencesemantics.h"
 
 namespace ReferenceSemantics
 {
@@ -21,28 +21,26 @@ namespace ReferenceSemantics
             REQUIRE_FALSE(dynamic_cast<const TypeB*>(types[0].get()));
             REQUIRE_FALSE(dynamic_cast<const TypeA*>(types[1].get()));
 
-            for(const std::unique_ptr<Type>& type : types)
+            // Type A
             {
-                if(const TypeA* const typeA{dynamic_cast<const TypeA*>(type.get())})
-                {
-                    REQUIRE(typeA->GetInt() == 0);
-                    type->Accept(TypeOperationA{});
-                    REQUIRE(typeA->GetInt() == 1);
-                    type->Accept(TypeOperationB{});
-                    REQUIRE(typeA->GetInt() == -1);
-                }
-                else if(const TypeB* const typeB{dynamic_cast<const TypeB*>(type.get())})
-                {
-                    REQUIRE(typeB->GetFloat() == 0.0f);
-                    type->Accept(TypeOperationA{});
-                    REQUIRE(typeB->GetFloat() == 1.0f);
-                    type->Accept(TypeOperationB{});
-                    REQUIRE(typeB->GetFloat() == -1.0f);
-                }
-                else
-                {
-                    REQUIRE(false);
-                }
+                Type* const type{types[0].get()};
+                const TypeA* const typeA{static_cast<const TypeA*>(type)};
+                REQUIRE(typeA->GetInt() == 0);
+                type->Accept(TypeOperationA{});
+                REQUIRE(typeA->GetInt() == 1);
+                type->Accept(TypeOperationB{});
+                REQUIRE(typeA->GetInt() == -1);
+            }
+
+            // Type B
+            {
+                Type* const type{types[1].get()};
+                const TypeB* const typeB{static_cast<const TypeB*>(type)};
+                REQUIRE(typeB->GetFloat() == 0.0f);
+                type->Accept(TypeOperationA{});
+                REQUIRE(typeB->GetFloat() == 1.0f);
+                type->Accept(TypeOperationB{});
+                REQUIRE(typeB->GetFloat() == -1.0f);
             }
         }
     }

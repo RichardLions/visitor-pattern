@@ -15,12 +15,14 @@ namespace ReferenceSemantics
 
     class TypeOperationA final : public TypeVisitor
     {
+    public:
         void Visit(TypeA& type) const override;
         void Visit(TypeB& type) const override;
     };
 
     class TypeOperationB final : public TypeVisitor
     {
+    public:
         void Visit(TypeA& type) const override;
         void Visit(TypeB& type) const override;
     };

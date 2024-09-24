@@ -20,10 +20,10 @@ namespace ReferenceSemantics
     {
     public:
         void Accept(const TypeVisitor& visitor) override;
-        [[nodiscard]] uint32_t GetInt() const { return m_IntValue; }
-        void SetInt(uint32_t value) { m_IntValue = value; }
+        [[nodiscard]] int32_t GetInt() const { return m_IntValue; }
+        void SetInt(int32_t value) { m_IntValue = value; }
     private:
-        uint32_t m_IntValue{0};
+        int32_t m_IntValue{0};
     };
 
     class TypeB final : public Type
