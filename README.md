@@ -92,7 +92,7 @@ public:
 
 Call an Operation:
 ```cpp
-using Type = std::variant<TypeA, TypeB>;
+using Type = std::variant<TypeA, ...>;
 using Types = std::vector<Type>;
 
 Types types{};
