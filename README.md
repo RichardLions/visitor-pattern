@@ -60,6 +60,8 @@ public:
 
 Call an Operation:
 ```cpp
+using Types = std::vector<std::unique_ptr<Type>>;
+
 Types types{};
 types.push_back(std::make_unique<TypeA>());
 for(const std::unique_ptr<Type>& type : types)
@@ -70,20 +72,17 @@ for(const std::unique_ptr<Type>& type : types)
 
 ### Value Semantics
 
-Create a Type:
+Creating a Type, no inheritance:
 ```cpp
 class TypeA
 {
 public:
 };
-
-using Type = std::variant<TypeA>;
-using Types = std::vector<Type>;
 ```
 
-Create an Operation:
+Create an Operation, no inheritance:
 ```cpp
-class TypeOperationA final
+class TypeOperationA
 {
 public:
     static void Visit(Type& type) { std::visit(TypeOperationA{}, type); }
@@ -93,6 +92,9 @@ public:
 
 Call an Operation:
 ```cpp
+using Type = std::variant<TypeA, TypeB>;
+using Types = std::vector<Type>;
+
 Types types{};
 types.emplace_back(TypeA{});
 for(Type& type : types)
@@ -135,7 +137,7 @@ To create a clean vcpkg.json and vcpkg-configuration.json file run:
 vcpkg new --application
 ```
 
-TODO:
+### TODO
 - [x] Reference Semantics Implementation
 - [x] Reference Semantics Unit Tests
 - [x] Value Semantics Implementation
